@@ -1,0 +1,14 @@
+overlay: 1.0.0
+info:
+  title: Change header
+  version: 0.1.0
+actions:
+  - target: $.paths["/stations"].get.responses.200.headers.RateLimit
+    description: Delete rate limit header
+    remove: true
+  - target: $.paths["/stations"].get.responses.200.headers
+    description: Change header schema
+    update:
+      RateLimit:
+        schema:
+          type: nubmer

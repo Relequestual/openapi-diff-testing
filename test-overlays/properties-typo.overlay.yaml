@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: Typo for properties keyword
+  version: 0.1.0
+actions:
+  - target: $.components.schemas["Links-Pagination"].properties
+    description: Delete schema
+    remove: true
+  - target: $.components.schemas["Links-Pagination"]
+    description: Add properties back but with typo. Otherwise identical.
+    update:
+      roperties:
+        next:
+          type: string
+          format: uri
+        prev:
+          type: string
+          format: uri

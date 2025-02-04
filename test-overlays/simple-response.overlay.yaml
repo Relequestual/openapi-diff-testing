@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: Modify response payload
+  version: 0.1.0
+actions:
+  - target: $.paths["/bookings/{bookingId}/payment"].post.responses.200.content["application/json"].schema
+    description: Delete schema
+    remove: true
+  - target: $.paths["/bookings/{bookingId}/payment"].post.responses.200.content["application/json"]
+    description: Make a simple modification of a response payload
+    update:
+      schema:
+        type: number

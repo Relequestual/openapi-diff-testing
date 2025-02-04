@@ -1,0 +1,11 @@
+overlay: 1.0.0
+info:
+  title: Modify request payload
+  version: 0.1.0
+actions:
+  - target: $.paths["/bookings/{bookingId}/payment"].post.requestBody.content["application/json"].schema
+    description: Delete schema
+    remove: true
+  - target: $.paths["/bookings/{bookingId}/payment"].post.requestBody.content["application/json"]
+    description: Make a simple modification of a request payload
+    update: { schema: { type: object } }

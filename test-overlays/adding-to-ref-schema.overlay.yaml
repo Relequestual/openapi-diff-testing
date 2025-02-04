@@ -1,0 +1,8 @@
+overlay: 1.0.0
+info:
+  title: Modify request payload with ref value
+  version: 0.1.0
+actions:
+  - target: $.paths["/bookings/{bookingId}/payment"].post.requestBody.content["application/json"].schema
+    description: Make a simple modification of a request payload with ref value
+    update: { allOf: [false] }

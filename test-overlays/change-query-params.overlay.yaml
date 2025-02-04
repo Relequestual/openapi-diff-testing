@@ -1,0 +1,10 @@
+overlay: 1.0.0
+info:
+  title: Change query paramiters
+  version: 0.1.0
+actions:
+  - target: $.paths["/trips"].get.parameters[6]
+    description: Look for cats rather than dogs (modify allowed params)
+    update:
+      name: cats
+      description: Only return trips where cats are known to be allowed

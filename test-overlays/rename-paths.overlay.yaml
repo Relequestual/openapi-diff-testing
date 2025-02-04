@@ -1,0 +1,112 @@
+overlay: 1.0.0
+info:
+  title: Modify a path for testing
+  version: 0.1.0
+actions:
+  - target: $.paths["/stations"]
+    description: Remove a path and see if it's noticed
+    remove: true
+  - target: $.paths
+    description: Re-add path under different name
+    update:
+      /stationsss:
+        get:
+          summary: Get a list of train stations
+          operationId: get-stations
+          tags:
+            - Stations
+          description: Returns a paginated and searchable list of all train stations.
+          parameters:
+            - $ref: "#/components/parameters/page"
+            - $ref: "#/components/parameters/limit"
+            - name: coordinates
+              in: query
+              description: >
+                The latitude and longitude of the user's location, to narrow down
+                the search results to sites within a proximity of this location.
+              required: false
+              schema:
+                type: string
+              example: "52.5200,13.4050"
+            - name: search
+              in: query
+              description: |
+                A search term to filter the list of stations by name or address.
+              required: false
+              schema:
+                type: string
+                example: Milano Centrale
+            - name: country
+              in: query
+              description: Filter stations by country code
+              required: false
+              schema:
+                type: string
+                format: iso-country-code
+              example: DE
+          responses:
+            "200":
+              description: OK
+              headers:
+                Cache-Control:
+                  $ref: "#/components/headers/Cache-Control"
+                RateLimit:
+                  $ref: "#/components/headers/RateLimit"
+              content:
+                application/json:
+                  schema:
+                    allOf:
+                      - $ref: "#/components/schemas/Wrapper-Collection"
+                      - properties:
+                          data:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/Station"
+                      - properties:
+                          links:
+                            allOf:
+                              - $ref: "#/components/schemas/Links-Self"
+                              - $ref: "#/components/schemas/Links-Pagination"
+                  example:
+                    data:
+                      - id: efdbb9d1-02c2-4bc3-afb7-6788d8782b1e
+                        name: Berlin Hauptbahnhof
+                        address: "Invalidenstraße 10557 Berlin, Germany"
+                        country_code: DE
+                        timezone: Europe/Berlin
+                      - id: b2e783e1-c824-4d63-b37a-d8d698862f1d
+                        name: Paris Gare du Nord
+                        address: "18 Rue de Dunkerque 75010 Paris, France"
+                        country_code: FR
+                        timezone: Europe/Paris
+                    links:
+                      self: "https://api.example.com/stations&page=2"
+                      next: "https://api.example.com/stations?page=3"
+                      prev: "https://api.example.com/stations?page=1"
+                application/xml:
+                  schema:
+                    allOf:
+                      - $ref: "#/components/schemas/Wrapper-Collection"
+                      - properties:
+                          data:
+                            type: array
+                            xml:
+                              name: stations
+                              wrapped: true
+                            items:
+                              $ref: "#/components/schemas/Station"
+                      - properties:
+                          links:
+                            allOf:
+                              - $ref: "#/components/schemas/Links-Self"
+                              - $ref: "#/components/schemas/Links-Pagination"
+            "400":
+              $ref: "#/components/responses/BadRequest"
+            "401":
+              $ref: "#/components/responses/Unauthorized"
+            "403":
+              $ref: "#/components/responses/Forbidden"
+            "429":
+              $ref: "#/components/responses/TooManyRequests"
+            "500":
+              $ref: "#/components/responses/InternalServerError"

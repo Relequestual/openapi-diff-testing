@@ -1,0 +1,8 @@
+overlay: 1.0.0
+info:
+  title: Modify link booking schema
+  version: 0.1.0
+actions:
+  - target: $.components.schemas["Links-Booking"]
+    description: Modify link booking schema
+    update: { type: number }

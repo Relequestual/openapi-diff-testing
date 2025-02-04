@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: Remove things for testing
+  version: 0.1.0
+actions:
+  - target: $["x-topics"]
+    description: See https://github.com/pb33f/openapi-changes/issues/179
+      Removing x-topics because it trips up some parsers, trying to find a file at a relative location which doesn't exist
+    remove: true
+  # - traget: $..[exclusiveMinimum,exclusiveMaximum]
+  #   description: Downgrade tool doesn't support exclusive minimum or maximum
+  #     Or a bunch of other things too!
+  #   remove: true
