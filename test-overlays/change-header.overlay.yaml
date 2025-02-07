@@ -11,4 +11,4 @@ actions:
     update:
       RateLimit:
         schema:
-          type: nubmer
+          type: number
