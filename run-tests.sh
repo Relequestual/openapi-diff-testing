@@ -1,15 +1,13 @@
 #!/bin/bash
 
 # Define tools and their commands using indexed arrays
-tools=("openapi-changes" "oasdiff")
-commands=("openapi-changes -b -n -m summary" "oasdiff changelog")
+tools=("openapi-changes" "oasdiff" "openapi-diff" "optic")
+commands=("openapi-changes -b -n -m summary" "oasdiff changelog" "openapi-diff" "optic diff")
 
-# Function to check if a tool is installed
 check_tool_installed() {
-    command -v "$1" >/dev/null 2>&1 || { echo >&2 "$1 is not installed. Aborting."; exit 1; }
+    command "$1" --version >/dev/null 2>&1 || { echo >&2 "$1 is not installed. Aborting."; exit 1; }
 }
 
-# Function to run comparisons
 run_comparisons() {
     local tool=$1
     local command=$2
@@ -42,15 +40,17 @@ while getopts "a" opt; do
 done
 shift $((OPTIND -1))
 
-baseline=$1
-folder=${2:-"./test-oads/"}
 
 if [ "$all_tools" = true ]; then
+    baseline=$1
+    folder=${2:-"./test-oads/"}
     for i in "${!tools[@]}"; do
         run_comparisons "${tools[$i]}" "${commands[$i]}" "$baseline" "$folder"
     done
 else
     tool=$1
+    baseline=$2
+    folder=${3:-"./test-oads/"}
     for i in "${!tools[@]}"; do
         if [ "${tools[$i]}" = "$tool" ]; then
             run_comparisons "$tool" "${commands[$i]}" "$baseline" "$folder"
