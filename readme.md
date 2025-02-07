@@ -11,8 +11,28 @@ Sourced at https://github.com/bump-sh-examples/train-travel-api
 ## Requirements
 
 - [Open API Overlays](https://github.com/lornajane/openapi-overlays-js) installed globally per install instructions.
+
+### Optional requirements
+At least one of...
+
 - [OASDiff](https://github.com/tufin/oasdiff)
 - [OpenAPI Changes](https://github.com/pb33f/openapi-changes)
+- [OpenAPI Diff](https://github.com/OpenAPITools/openapi-diff)
+- [Optic](https://github.com/opticdev/optic)
+- [Open API Comparator](https://github.com/criteo/openapi-comparator)
+
+
+Some tools will require their toolchain to work.
+- Node
+- .Net
+- Java
+
+For OpenAPITools/openapi-diff, I installed via brew.
+`brew install openapi-diff`
+You may also install and use via docker, but you will have to modify the CLI call.
+
+For Open API Comparator, while dotnet can be installed via brew, it asked for my system password.
+So I opted for a manual install from [.net downloads](https://dotnet.microsoft.com/en-us/download).
 
 ## Useage
 
@@ -50,6 +70,15 @@ https://github.com/tufin/oasdiff - 1.10.27
 
 `oasdiff changelog <baseline> <changed>`
 
+https://github.com/OpenAPITools/openapi-diff - 2.0.1
+
+`openapi-diff <baseline> <changed>`
+
+https://github.com/opticdev/optic - 1.0.6
+
+`optic diff <baseline> <changed>`
+(This is a little noisy on the output as it doesn't seem to allow for disabling checks. https://github.com/opticdev/optic/issues/2879)
+
 
 ### Further work
 
@@ -59,3 +88,4 @@ https://github.com/tufin/oasdiff - 1.10.27
 ### Other tools used
 
 https://jsonpathfinder.com
+
