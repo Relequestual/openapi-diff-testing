@@ -20,6 +20,8 @@ At least one of...
 - [OpenAPI Diff](https://github.com/OpenAPITools/openapi-diff)
 - [Optic](https://github.com/opticdev/optic)
 - [Open API Comparator](https://github.com/criteo/openapi-comparator)
+- [Bump CLI](https://github.com/bump-sh/cli)
+- [Speakeasy](https://github.com/speakeasy-api/speakeasy)
 
 
 Some tools will require their toolchain to work.
@@ -77,7 +79,37 @@ https://github.com/OpenAPITools/openapi-diff - 2.0.1
 https://github.com/opticdev/optic - 1.0.6
 
 `optic diff <baseline> <changed>`
+
 (This is a little noisy on the output as it doesn't seem to allow for disabling checks. https://github.com/opticdev/optic/issues/2879)
+
+https://github.com/criteo/openapi-comparator - 0.8.1
+
+`openapi-compare -o <baseline> -n <changed>`
+
+https://github.com/bump-sh/cli - 2.9.2
+
+Note, this calls an API! So only use this on OADs you don't mind sharing with Bump.sh
+
+`bump diff <baseline> <changed>`
+
+https://bitbucket.org/atlassian/openapi-diff - 0.23.7
+
+When installed globally, this happens to have the same name as openapi-diff above.
+I had Volta installed, and it captures global installs with npm.
+As such, I used the following command, but you may need to modify it once you have it installed.
+
+I intially got a small number of results, but after fixing a validation issue and then re-running the script, the process hanged.
+I can't even run ANY of the tests.
+Open to PRs!
+
+`volta run openapi-diff <baseline> <changed>`
+
+https://github.com/speakeasy-api/speakeasy - 1.487.1
+
+Seems to be identical to OpenAPI-changes by bp33f.
+
+`speakeasy openapi diff --old <baseline --new <changed>`
+
 
 
 ### Further work

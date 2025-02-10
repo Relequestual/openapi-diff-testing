@@ -5,4 +5,4 @@ info:
 actions:
   - target: $.paths["/bookings/{bookingId}/payment"].post.requestBody.content["application/json"].schema
     description: Make a simple modification of a request payload with ref value
-    update: { allOf: [false] }
+    update: { allOf: [not: {}] }
